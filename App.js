@@ -99,7 +99,7 @@ export default class App extends React.Component {
           <Button 
           title = {"View"}
           onPress={() => {
-            PDFPrinterModule.createPDFDocument(this._pages, rootPath + 'test/Test.pdf', (done, path) => {
+            PDFPrinterModule.createPDFDocument(this._pages, rootPath + 'Test.pdf', (done, path) => {
               console.log("finito == " + done);
               console.log("finito == " + path);
               this.setState({visible: done});
@@ -107,7 +107,7 @@ export default class App extends React.Component {
             });
           }} />
           
-          <View style={{borderColor: 'yellow', borderWidth: 3}}>
+          <View style={{borderColor: 'yellow', borderWidth: 3, flex: 1}}>
             {this.state.visible && <Pdf source={{uri: 'file://' + this.state.pdfPath, cache: true}} style={{flex: 1}} onError={(error) => {console.log(error);}}/>}
           </View>
         </View>

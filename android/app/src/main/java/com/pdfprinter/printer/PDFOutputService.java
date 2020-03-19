@@ -1,9 +1,7 @@
 package com.pdfprinter.printer;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.print.PrintAttributes;
@@ -21,8 +19,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 /**
  * Class holding the functionality to render a viewable PDF as well as rendering a PDF ready to be
@@ -51,10 +47,6 @@ public class PDFOutputService {
     }
 
     public void createPDFDocument(ReadableArray pages, String documentName, Callback callback) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(context.getCurrentActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        }
         PrintedPdfDocument pdfDocument = new PrintedPdfDocument(
                 Objects.requireNonNull(context.getCurrentActivity()), PDF_STANDARD_ATTRIBUTE);
         for (int i = 0; i < pages.size(); i++) {
